@@ -1,0 +1,51 @@
+
+#get the data files 
+#// either hardcoded or through a script
+datasetList = ["dataset1", "dataset2", "dataset3"]
+
+
+#declare the TTree file and it's branches, remember the data is in the format: YYYY-MM-DD;HH:MM:SS;Measurement;Quality
+
+TTree(dataTree) 
+
+TBranch(date)
+TBranch(timestamp)
+TBranch(measurement)
+TBranch(quality)
+
+
+#//if multiple files
+#iterate through file list
+for dataset in datasetList: 
+
+    #open the file 
+    working_copy = open dataset
+
+    #loop over each line in the file
+    for line in working_copy:
+
+        #extract the line from the file (stingstream from sstream should work well here)
+        stingstream ss(line)
+
+
+        #separate the line into each substring with delimiter being ";" (getline from string should work here)
+        getline(ss, date, ";")
+        getline(ss, timestamp, ";")
+        getline(ss, measurement, ";")
+        getline(ss, quality, ";")
+
+
+        #check that the quality is satisfactory (G and maybe Y)
+        if quality != G and quality != Y:
+            continue
+
+        #fill the TTree with the data 
+        TTree->fill
+
+
+#save and close the TTree
+TTree->write
+TTree->close
+
+
+
