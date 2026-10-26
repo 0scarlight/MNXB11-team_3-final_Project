@@ -2,6 +2,8 @@
 #define CSVPARSING
 #include<string>
 
-void csvCleaner(const std::string filename, const std::string name);
+//Removes unecessary data  
+void csvCleaner(const std::string inputName, const std::string outputName);
 
+void csvTotree (const std::string inputName, const std::string startTime, const std::string endTime); 
 #endif

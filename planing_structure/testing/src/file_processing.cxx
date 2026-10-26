@@ -2,13 +2,20 @@
 #include<sting>
 #include<fstream>
 #include<sstream>
-#include"file_preprocessing.h"
+#include"file_processing.h"
 
-void csvCleaner(const std::string filename, const std::string name){
+#include"climate_class.h"
+#include<TFile.h>
+#include<TTree.h>
+#include<TObject>
+
+void csvCleaner(const std::string inputName, const std::string outputName){
 
 
-    std::ifstream input(filename);
-    std::ofstream output(name + "_cleaned.csv");
+    std::ifstream input(inputName);
+
+    //Currently takes a user defined name, can be made to generate name based on metadata
+    std::ofstream output(outputName + "_cleaned.csv");
 
     std::string line;
 
@@ -19,7 +26,7 @@ void csvCleaner(const std::string filename, const std::string name){
     //line format YYYY-MM-DD;HH:MM:SS;measurement;quality 
     while (std::getline(input,line)) {
         //check for correct line
-        if (line.find(";G") == line.npos ||
+        if (line.find(";G") == line.npos &&
             line.find(";Y") == line.npos) {
                 continue;
             };
@@ -59,6 +66,22 @@ void csvCleaner(const std::string filename, const std::string name){
 };
 
 
+void csvTotree (const std::string inputName, const std::string startTime, const std::string endTime) {
+    std::ifstream input(inputName);
+    std::string outputName = inputName.substr(0, inputName.find("_"))
 
+    climateData *object = nullptr;
+
+    TFile *F = new TFile(outputName + "_file.root", "RECREATE")
+
+    TTree *T = new TTree(outputName , "Climate data")
+
+
+
+
+
+
+    return;
+};
 
 
