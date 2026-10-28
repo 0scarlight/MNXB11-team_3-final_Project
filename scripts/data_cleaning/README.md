@@ -3,7 +3,7 @@
 
 This is my part of our course project, focusing on **data cleaning** of historical temperature observations from SMHI.
 
-## Project Workflow
+## Proposed Project Workflow
 
 ![Project Workflow](<Data Cleaning and Analysis Workflow.png>)
 
