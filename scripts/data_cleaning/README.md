@@ -3,6 +3,12 @@
 
 This is my part of our course project, focusing on **data cleaning** of historical temperature observations from SMHI.
 
+## Project Workflow
+
+![Project Workflow](<Data Cleaning and Analysis Workflow.png>)
+
+## Data Cleaning Procedure
+
 The script performs four checks, in the following order:
 
 1. Data format
