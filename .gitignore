@@ -46,3 +46,10 @@ argumentum*
 # Don't add the main executable to git
 main
 
+# Ignore the uncompressed datasets
+datasets/*
+
+# Ignore the testing folder
+planing_structure/testing/*
+
+scripts/data_cleaning
