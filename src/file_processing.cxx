@@ -1,5 +1,5 @@
 #include<iostream>
-#include<sting>
+#include<string>
 #include<fstream>
 #include<sstream>
 #include"file_processing.h"
@@ -7,27 +7,42 @@
 #include"climate_class.h"
 #include<TFile.h>
 #include<TTree.h>
-#include<TObject>
+#include<TObject.h>
+#include<iostream>
 
-void csvToTree(const std::vector<string> inputList, const std::string startTime, const std::string endTime){
+void csvToTree(const std::vector<string> inputList){
 
 ClimateData *object = nullptr;
 
-TFile *F = new TFile("Climate_data" + "_file.root", "RECREATE")
+TFile *F = new TFile("Climate_data_file.root", "RECREATE");
 
-TTree *T = new TTree("tree" , "Climate data")
+ if (!F || F->IsZombie()) {
+        std::cerr << "Could not create ROOT file\n";
+        delete object;
+        delete F;
+        return;
+    };
 
-//using splitlevel to autocreate branches for each member variable of climateData
-T->Branch("Climate data", &object, 32000, 1)
+TTree *T = new TTree("tree" , "Climate data");
 
+T->Branch("Climate data", &object);
 
 for (std::string inputName : inputList){
 
     std::ifstream input(inputName);
 
-    std::string stationName = inputName.substr(0, inputName.find("_"))
+    if (!input.is_open()){
+        std::cerr << "Could not open file " << inputName << std::endl;
+        continue;
+
+    };
+
+
+    std::string stationName = inputName.substr(0, inputName.find("_"));
 
     std::string line;
+
+    object = new ClimateData();
 
     //line format YYYY-MM-DD;HH:MM:SS;measurement;quality 
     while (std::getline(input,line)) {
@@ -36,38 +51,46 @@ for (std::string inputName : inputList){
             line.find(";Y") == line.npos) {
                 continue;
             };
-        std::stringstream working_line(line)
+        std::stringstream working_line(line);
 
         //extract the data present in the  file into their own strings
         std::string date, timestamp, measurement; 
-        std::getline(line, date, ";");
-        std::getline(line, timestamp, ";");
-        std::getline(line, measurement, ";");
-
+        std::getline(working_line, date, ';');
+        std::getline(working_line, timestamp, ';');
+        std::getline(working_line, measurement, ';');
+        
         //extract individual strings for each subcomponent of the date
-        std::string year, month, dat;
-        std::getline(date, year, "-");
-        std::getline(date, month, "-");
-        std::getline(date, day, "-");
+        std::stringstream dateStream(date);
+        std::string year, month, day;
+        std::getline(dateStream, year, '-');
+        std::getline(dateStream, month, '-');
+        std::getline(dateStream, day, '-');
 
         //extract individual strings for each subcomponent of the timestamp
+        std::stringstream timeStream(timestamp);
         std::string hour, minute, second;
-        std::getline(timestamp, hour, ":");
-        std::getline(timestamp, minute, ":");
-        std::getline(timestamp, second, ":");
+        std::getline(timeStream, hour, ':');
+        std::getline(timeStream, minute, ':');
+        std::getline(timeStream, second, ':');
         
-        object = new ClimateData(std::stoi(year), std::stoi(month), std::stoi(day), std::stoi(hour), std::stoi(minute), std::stoi(second) std::stod(measurement), stationName);
+        object->setData(std::stoi(year), std::stoi(month), std::stoi(day), std::stoi(hour), std::stoi(minute), std::stoi(second), std::stod(measurement), stationName);
         
-        T->Fill()
-        delete object
-        object = nullptr;
+        T->Fill();
+        //T->Print();
+        
+        ;
     };
 
-    input.close()
+    delete object;
+    object = nullptr;
+    input.close();
 };
 
-T->Write()
-F->Close()
+F->cd();
+T->Write();
+std::cout << "Entries: " << T->GetEntries() << '\n';
+F->Close();
+delete F;
     return;
 };
 

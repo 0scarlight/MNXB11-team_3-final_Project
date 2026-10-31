@@ -3,6 +3,8 @@
 
 #include<TObject.h>
 #include<string>
+#include<cstdint>
+
 
 class ClimateData : public TObject{
     public:
@@ -10,7 +12,7 @@ class ClimateData : public TObject{
 
     ClimateData();
 
-    ClimateData(int year, int month, int day, int month, int hour, int minute, int second, int measurement, std::string stationName);
+    ClimateData(int year, int month, int day, int hour, int minute, int second, double measurement, std::string stationName);
 
     //getters:
 
@@ -26,6 +28,8 @@ class ClimateData : public TObject{
 
     int getSecond() const;
 
+    //std::int64_t getUnixTime() const;
+
     double getMeasurement() const;
     
     std::string getStationName() const;
@@ -39,6 +43,10 @@ class ClimateData : public TObject{
     int getTimestampInt() const;
 
 
+    //setters
+
+    void setData(int year, int month, int day, int hour, int minute, int second, double measurement, std::string stationName);
+
     private:
     int year_;
     int month_;
@@ -46,6 +54,7 @@ class ClimateData : public TObject{
     int hour_;
     int minute_;
     int second_;
+    //std::int64_t unixTime_;
     double measurement_;
     std::string stationName_;
 

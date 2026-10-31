@@ -20,7 +20,8 @@ import pandas as pd
 # ==========================================================
 # 0. CONFIGURATION: EDIT ONLY THE FILE PATH AS NEEDED
 # ==========================================================
-file_path = r"c:\Users\o-sca\Desktop\Stuff\LU\MNXB11-team_3-final_Project\datasets\smhi-opendata_1_52230_20261007_165001_Falsterbo.csv"
+#
+file_path = "smhi-opendata_1_52230_20261007_165001_Falsterbo.csv"
 # file_path = "smhi-opendata_1_53430_20261007_164857_Lund.csv"
 # file_path = "smhi-opendata_1_62410_20261007_164836_Halmstad_flygplats.csv"
 # file_path = "smhi-opendata_1_72450_20261007_164940_Borås.csv"
@@ -31,7 +32,7 @@ file_path = r"c:\Users\o-sca\Desktop\Stuff\LU\MNXB11-team_3-final_Project\datase
 # file_path = "smhi-opendata_1_99450_20261007_164731_Söderarm_A.csv"
 # file_path = "smhi-opendata_1_105370_20261007_165044_Falun-Lugnet.csv"
 # file_path = "smhi-opendata_1_140480_20261007_164814_Umeå_Flygplats.csv"
-# file_path = "smhi-opendata_1_162860_20261007_164918_Luleå-Kallax_Flygplats.csv"
+#file_path = "smhi-opendata_1_162860_20261007_164918_Luleå-Kallax_Flygplats.csv"
 
 
 MIN_TEMP = -45.0

@@ -20,4 +20,8 @@ void rootlogon() {
   gStyle->SetPadRightMargin(0.05);
   gStyle->SetPadBottomMargin(0.16);
   gStyle->SetPadLeftMargin(0.16);
+
+  //make sure root know where to find header files
+  gSystem->AddIncludePath("-I./include");
+
 }
