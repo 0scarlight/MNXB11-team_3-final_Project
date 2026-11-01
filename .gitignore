@@ -52,4 +52,4 @@ datasets/*
 # Ignore the testing folder
 planing_structure/testing/*
 
-scripts/data_cleaning
+scripts/data_cleaning/*

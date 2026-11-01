@@ -1,8 +1,7 @@
 # Workplan for MNXB11 project
 
 Team number: 3
-Team members: Rebecca Batchelor, Zuzanna Popek
-Zuzanna Popek, Jie Qi, Oscar Tang 
+Team members: Rebecca Batchelor, Zuzanna Popek, Jie Qi, Oscar Tang 
 
 # Plan
 
