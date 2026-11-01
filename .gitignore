@@ -52,4 +52,25 @@ datasets/*
 # Ignore the testing folder
 planing_structure/testing/*
 
-scripts/data_cleaning
+# Ignore changes to the cleaning scripts
+scripts/data_cleaning/*
+
+# Ignore file generated during the LaTeX compilation
+LaTeX/*.aux
+LaTeX/*.bbl
+LaTeX/*.bcf
+LaTeX/*.blg
+LaTeX/*.fdb_latexmk
+LaTeX/*.fls
+LaTeX/*.log
+LaTeX/*.out
+LaTeX/*.run.xml
+LaTeX/*.synctex.gz
+LaTeX/*.toc
+LaTeX/*.lof
+LaTeX/*.lot
+LaTeX/*.nav
+LaTeX/*.snm
+LaTeX/*.vrb
+LaTeX/*.xdv
+
