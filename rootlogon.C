@@ -23,5 +23,8 @@ void rootlogon() {
 
   //make sure root know where to find header files
   gSystem->AddIncludePath("-I./include");
+  gSystem->AddIncludePath("-I./src");
 
+  gROOT->LoadMacro("src/file_processing.cxx+");
+  gROOT->LoadMacro("src/climate_class.cxx+");
 }
