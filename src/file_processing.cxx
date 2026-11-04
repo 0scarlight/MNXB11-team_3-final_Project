@@ -9,6 +9,7 @@
 #include<TTree.h>
 #include<TObject.h>
 #include<iostream>
+#include <filesystem>
 
 void csvToTree(const std::vector<string> inputList){
 
@@ -37,8 +38,9 @@ for (std::string inputName : inputList){
 
     };
 
+    std::string stationName = std::filesystem::path(inputName).filename().string();
 
-    std::string stationName = inputName.substr(0, inputName.find("_"));
+    stationName = stationName.substr(0, stationName.find("_Clean.csv"));
 
     std::string line;
 
