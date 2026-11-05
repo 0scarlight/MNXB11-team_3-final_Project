@@ -74,3 +74,5 @@ LaTeX/*.snm
 LaTeX/*.vrb
 LaTeX/*.xdv
 
+# Ignore the resulting file(s) from root compilation
+*.pcm
