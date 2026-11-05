@@ -1,0 +1,15 @@
+# Change the path to the cleaned data and the filenames
+CLEAN_DATA_PATH="scripts/data_cleaning/dataset_clean"
+
+FILENAMES=("Borås_Clean.csv" "Falsterbo_Clean.csv" "Falun-Lugnet_Clean.csv" "Halmstad_flygplats_Clean.csv" "Karlstad_Flygplats_Clean.csv" "Luleå-Kallax_Flygplats_Clean.csv" "Lund_Clean.csv" "Söderarm_A_Clean.csv" "Umeå_Flygplats_Clean.csv" "Uppsala_Flygplats_Clean.csv" "Visby_Flygplats_Clean.csv")
+
+
+
+
+
+# Do not need to touch
+FILES=()
+
+for filename in "${FILENAMES[@]}"; do
+    FILES+=("$CLEAN_DATA_PATH/$filename")
+done
