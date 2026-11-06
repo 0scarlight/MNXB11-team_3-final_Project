@@ -32,7 +32,7 @@ TFile* f = TFile::Open(file);
 
     // Check if the file was opened successfully
     if (!f || f->IsZombie()) {
-        std::cerr << "Error: Could not open file 'tree_file.root'." << std::endl;
+        std::cerr << "Error: Could not open file." << std::endl;
         return;
     }
 
@@ -40,7 +40,7 @@ TFile* f = TFile::Open(file);
  // Get the TTree from the file
     TTree* tree = (TTree*)f->Get("tree");
     if (!tree) {
-        std::cerr << "Error: Could not find tree 'tree' in file." << std::endl;
+        std::cerr << "Error: Could not find tree called 'tree' in file." << std::endl;
         f->Close();
         return;
     }
