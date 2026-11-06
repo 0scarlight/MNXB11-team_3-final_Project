@@ -143,9 +143,9 @@ CalculateDailyMean(TTree* tree, std::string station)
 }
 
 /// plotting the results
-void PlotDailyMean(TTree* tree)
+void PlotDailyMean(TTree* tree, std::string station) 
 {
-    auto results = CalculateDailyMean(tree, "Falsterbo");
+    auto results = CalculateDailyMean(tree, station);
 
     auto mean = results.first;
     auto SD = results.second;
