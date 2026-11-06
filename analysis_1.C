@@ -22,11 +22,6 @@ void day_hist( int month = 6, int day = 30,
             int year_from =1880, int year_to =2025,
             const char* file = "Climate_data_file.root") {
 
-            
-            
-// DO FROM BEFORE 1997 - JUST LESS READINGS FROM BEFORE THEN 
-
-
 
 TFile* f = TFile::Open(file);
 
