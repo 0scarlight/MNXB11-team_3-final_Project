@@ -9,4 +9,4 @@ class TH1D;
 std::pair<std::vector<double>, std::vector<double>>
 CalculateDailyMean(TTree* tree, std::string station);
 
-void PlotDailyMean(TTree* tree);
+void PlotDailyMean(TTree* tree, std::string station = "Falsterbo");
