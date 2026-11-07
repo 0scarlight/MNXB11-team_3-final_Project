@@ -1,15 +1,30 @@
-
+#include "daily_means.h"
+/// #include "insert task 3.1 header file here"
+/// #include "insert own task header file here"
 #include <iostream>
-int main(int argc, char *argv[]) {
-  std::cout << "I am just a code template, you need to implement the "
-               "functionality you want to use yourself!"
-            << std::endl;
+#include <TFile.h>
+#include <TTree.h>
 
-  std::cout << "We were passed " << argc
-            << " command line arguments, the first of which was " << argv[0]
-            << std::endl;
-  std::cout << "With a good CLI library, we could use the command line "
-               "arguments to make a useful program."
-            << std::endl;
+int main(){
+  
+  /// open our file
+  TFile* file = TFile::Open("Climate_data_file.root");
+
+  /// print if file does not exist 
+  if (!file || file->IsZombie()) {
+        std::cout << "Error: Could not open file!" << std::endl;
+        return 1;
+  }
+
+  /// get the tree
+  TTree* tree = nullptr;
+  file->GetObject("tree", tree);
+
+  PlotDailyMean(tree);
+  ///call function for task 3.1 here
+  ///call function for our made up task here
+
+  file->Close();
+  delete file;
   return 0;
 }
