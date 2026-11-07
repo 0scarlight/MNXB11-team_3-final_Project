@@ -1,5 +1,14 @@
 #!/bin/bash
 
+GITROOT=$(git rev-parse --show-toplevel)
+
+if [ -d $GITROOT ]; then
+     cd $GITROOT
+   else
+     echo "not a git repository, exiting..."
+     exit 1
+fi
+
 SCRIPT_DIR="$(dirname "${BASH_SOURCE[0]}")"
 
 source "$SCRIPT_DIR/config.txt"

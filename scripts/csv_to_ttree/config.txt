@@ -6,8 +6,7 @@ FILENAMES=("Borås_Clean.csv" "Falsterbo_Clean.csv" "Falun-Lugnet_Clean.csv" "Ha
 
 
 
-
-# Do not need to touch
+# Do not touch
 FILES=()
 
 for filename in "${FILENAMES[@]}"; do
