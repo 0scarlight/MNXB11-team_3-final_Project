@@ -36,3 +36,45 @@ YYYY-MM-DD Name LastName  <email@somewhere>
 
 	* Added source file daily_means.cxx
 	* Added include file daily_means.h
+
+
+2026-11-05 Oscar Tang <o-scarlight@outlook.com>
+
+	Created Bash script to run file processing:
+
+	* Created files:
+		* scripts/csv_to_ttree/config.txt
+		* scripts/csv_to_ttree/process_files.sh
+	* Moved files:
+		* createTTree.C to scripts/csv_to_ttree/createTTree.C
+	* Created Bash script process_files.sh: Launches ROOT in the course container and runs createTTree.C and compiles it's dependencies
+	* Changed createTTree.C to work with process_files.sh
+	* Changed rootlogon.C to include src/ and include/ when starting 
+
+
+2026-10-28 Oscar Tang <o-scarlight@outlook.com>
+
+	Continued and modified work for the file processing:
+
+	* Moved files:
+		* climate_class.h from planing_structure/testing/include/ to include/
+		* file_processing.h from planing_structure/testing/include/ to include/
+		* climate_class.cxx from planing_structure/testing/src/ to src/
+		* file_processing.cxx from planing_structure/testing/src/ to src/
+	* Combined functionality from csvTotree and csvCleaner into csvTotree: Converts the cleaned csv-file from the data cleaning script into a TTree using the class ClimateData
+
+
+2026-10-26 Oscar Tang <o-scarlight@outlook.com>
+
+	Updated Workplan and started working on thefile processing:
+	
+	* Added a basic outline of the project to Workplan.md 
+	* Started to add csvTotree to planing_structure/testing/src/file_processing.cxx: Converts a csv file to a TTree
+	* Created files:
+		* planing_structure/testing/include/climate_class.h
+		* planing_structure/testing/include/file_processing.h
+		* planing_structure/testing/src/climate_class.cxx
+		* planing_structure/testing/src/file_processing.cxx
+	* Implemented a function csvCleaner in planing_structure/testing/src/file_processing.cxx: converts the formatted data in the raw dataset to a more convenient format and store it in a csv-file
+	* Implemented the class "ClimateData" for future use in a TTree
+

@@ -25,6 +25,6 @@ void rootlogon() {
   gSystem->AddIncludePath("-I./include");
   gSystem->AddIncludePath("-I./src");
 
-  gROOT->LoadMacro("src/file_processing.cxx+");
-  gROOT->LoadMacro("src/climate_class.cxx+");
+  //gROOT->LoadMacro("src/file_processing.cxx+");
+  //gROOT->LoadMacro("src/climate_class.cxx+");
 }
