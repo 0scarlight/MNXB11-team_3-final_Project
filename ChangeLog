@@ -28,3 +28,11 @@ YYYY-MM-DD Name LastName  <email@somewhere>
 	* Checking directory structure
 	* Added Workplan.md
 
+# ACTUAL CHANGE LOG STARTS HERE. ARRANGE YOUR CHANGES CHRONOLOGICALLY - OLDEST AT THE BOTTOM.
+
+2026-11-06 Zuzanna Popek <zuzanna.popek4347@student.lu.se>
+
+	Completed task 3.2.
+
+	* Added source file daily_means.cxx
+	* Added include file daily_means.h
