@@ -21,7 +21,7 @@ int main(){
   file->GetObject("tree", tree);
 
   PlotDailyMean(tree);
-  DayHistogram(tree, 6, 30);
+  DayHistogram(tree, "Falsterbo", 6, 30);
   ///call function for our made up task here
 
   file->Close();
