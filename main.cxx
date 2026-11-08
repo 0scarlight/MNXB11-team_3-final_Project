@@ -1,5 +1,5 @@
 #include "daily_means.h"
-/// #include "insert task 3.1 header file here"
+#include "day_analysis.h
 /// #include "insert own task header file here"
 #include <iostream>
 #include <TFile.h>
@@ -21,7 +21,7 @@ int main(){
   file->GetObject("tree", tree);
 
   PlotDailyMean(tree);
-  ///call function for task 3.1 here
+  DayHistogram(tree, 6, 30);
   ///call function for our made up task here
 
   file->Close();
