@@ -36,4 +36,13 @@ scripts/csv_to_ttree/process_files.sh
 
 
 ## Data Analysis
-The data analysis is where the data actually gets used and represented. 
+The data analysis is where the data actually gets used and represented. This project covers 3 different ways to analyze the data, those being:
+
+* The mean temperature for each day of a given year
+* The mean temperature of a given day for a given number of years
+* THe amount of days in a year that have a mean temperature below 0°C in a year
+
+To run the data analysis:
+```bash
+
+```
