@@ -21,7 +21,7 @@ test -f Climate_data_file.root || curl -fL -o Climate_data_file.root https://raw
 Compile and run:
 
 ```bash
-g++ $(root-config --cflags) scripts/lund_cold_days/lund_cold_days.cpp -o lund_cold_days $(root-config --libs) -lTreePlayer
+g++ $(root-config --cflags) scripts/DataAnaTopic3_lund_cold_days/lund_cold_days.cpp -o lund_cold_days $(root-config --libs) -lTreePlayer
 ./lund_cold_days
 ```
 
