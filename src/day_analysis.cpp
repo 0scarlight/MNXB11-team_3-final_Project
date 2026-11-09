@@ -77,7 +77,7 @@ gStyle->SetOptTitle(1);
 
 
 auto histogram = new TH1D("temperature",
-Form ("Average Temperature of %d/%d Every Year from Falsterbo;Temperature [#circC];Entries", day, month, station), 100, 5, 30); 
+Form ("Average Temperature of %d/%d Every Year from %s;Temperature [#circC];Entries", day, month, station), 100, 5, 30); 
 histogram->SetFillColor(kRed + 1);
 
    
@@ -97,6 +97,7 @@ histogram->Draw();
 //guassian curve from mean and standard deviation
 double binWidth = histogram->GetBinWidth(1);
 double amp = histogram->GetEntries() * binWidth / (stdev * std::sqrt(2 * M_PI));
+canvas->SaveAs("day_analysis.pdf");
 
 TF1* g = new TF1("g", "gaus", 5, 30);
 g->SetParameters(amp, mean, stdev);
