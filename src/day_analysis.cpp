@@ -110,6 +110,7 @@ auto legend = new TLegend(0.55, 0.75, 0.88, 0.88);
 legend->AddEntry(histogram, Form("Temperature on %d/%d", day, month), "f");
 legend->AddEntry(g, "Gaussian (sample mean, std dev)", "l");
 legend->Draw();
+canvas->SaveAs(Form("hist_%d_%d.pdf", day, month));
 
 
 
