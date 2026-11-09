@@ -77,7 +77,7 @@ gStyle->SetOptTitle(1);
 
 
 auto histogram = new TH1D("temperature",
-Form ("Average Temperature of %d/%d Every Year from Falsterbo;Temperature [#circC];Entries", day, month, station), 100, 5, 30); 
+Form ("Average Temperature of %d/%d Every Year from %s;Temperature [#circC];Entries", day, month, station), 100, 5, 30); 
 histogram->SetFillColor(kRed + 1);
 
    
@@ -91,7 +91,7 @@ std::cout << "Mean = " << mean << " Standard Deviation = " << stdev <<
  "\n";
 
 
-auto canvas = new TCanvas();
+new TCanvas();
 histogram->Draw();
 
 //guassian curve from mean and standard deviation
