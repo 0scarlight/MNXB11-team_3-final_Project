@@ -3,8 +3,10 @@ CXXWARNINGS := -Wall -Wextra -Werror
 CXXOPT := -O3
 CXXSTD := -std=c++17
 INCLUDES := -I include
-CXXFLAGS := $(CXXWARNINGS) $(CXXSTD) $(CXXOPT) $(INCLUDES)
-LDFLAGS :=
+ROOTCFLAGS := $(shell root-config --cflags)
+ROOTLIBS := $(shell root-config --libs)
+CXXFLAGS := $(CXXWARNINGS) $(CXXSTD) $(CXXOPT) $(INCLUDES) $(ROOTCFLAGS)
+LDFLAGS := $(ROOTLIBS)
 
 .PHONY: all clean
 
@@ -16,11 +18,14 @@ all: main
 #
 # Remove the Example object file when you are done looking at it, it doesn't
 # contribute to the executable!
-main: main.cxx src/Example.o
+main: main.o src/daily_means.o  src/day_analysis.o
 	$(CXX) $(CXXFLAGS) -o $@ $^ $(LDFLAGS)
+
+%.o: %.cxx
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 src/%.o: src/%.cxx
 	$(CXX) $(CXXFLAGS) $^ -c -o $@
 
 clean:
-	rm -v src/*.o main
+	rm -fv src/*.o main.o main
