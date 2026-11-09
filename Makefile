@@ -16,8 +16,11 @@ all: main
 #
 # Remove the Example object file when you are done looking at it, it doesn't
 # contribute to the executable!
-main: main.cxx src/Example.o
+main: main.o src/daily_means.o  src/day_analysis.cpp
 	$(CXX) $(CXXFLAGS) -o $@ $^ $(LDFLAGS)
+
+%.o: %.cxx
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 src/%.o: src/%.cxx
 	$(CXX) $(CXXFLAGS) $^ -c -o $@
