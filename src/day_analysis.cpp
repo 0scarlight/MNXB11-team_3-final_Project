@@ -99,6 +99,7 @@ double binWidth = histogram->GetBinWidth(1);
 double amp = histogram->GetEntries() * binWidth / (stdev * std::sqrt(2 * M_PI));
 canvas->SaveAs("day_analysis.pdf");
 
+
 TF1* g = new TF1("g", "gaus", 5, 30);
 g->SetParameters(amp, mean, stdev);
 g->SetLineColor(kBlue);
@@ -111,6 +112,7 @@ auto legend = new TLegend(0.55, 0.75, 0.88, 0.88);
 legend->AddEntry(histogram, Form("Temperature on %d/%d", day, month), "f");
 legend->AddEntry(g, "Gaussian (sample mean, std dev)", "l");
 legend->Draw();
+canvas->SaveAs("day_analysis.pdf");
 
 
 
