@@ -77,7 +77,7 @@ gStyle->SetOptTitle(1);
 
 
 auto histogram = new TH1D("temperature",
-Form ("Average Temperature of %d/%d Every Year from Falsterbo;Temperature [#circC];Entries", day, month, station), 100, 5, 30); 
+Form ("Average Temperature of %d/%d Every Year from %s;Temperature [#circC];Entries", day, month, station), 100, 5, 30); 
 histogram->SetFillColor(kRed + 1);
 
    
@@ -98,6 +98,7 @@ histogram->Draw();
 double binWidth = histogram->GetBinWidth(1);
 double amp = histogram->GetEntries() * binWidth / (stdev * std::sqrt(2 * M_PI));
 
+
 TF1* g = new TF1("g", "gaus", 5, 30);
 g->SetParameters(amp, mean, stdev);
 g->SetLineColor(kBlue);
@@ -110,7 +111,7 @@ auto legend = new TLegend(0.55, 0.75, 0.88, 0.88);
 legend->AddEntry(histogram, Form("Temperature on %d/%d", day, month), "f");
 legend->AddEntry(g, "Gaussian (sample mean, std dev)", "l");
 legend->Draw();
-canvas->SaveAs(Form("hist_%d_%d.pdf", day, month));
+canvas->SaveAs("day_analysis.pdf");
 
 
 
