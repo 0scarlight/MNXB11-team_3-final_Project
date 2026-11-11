@@ -1,4 +1,5 @@
-#include <TFile.h>
+#include "lund_cold_days.h"
+
 #include <TTree.h>
 #include <TTreeReader.h>
 #include <TTreeReaderValue.h>
@@ -14,6 +15,8 @@
 #include <string>
 #include <vector>
 
+
+namespace {
 
 // ============================================================
 // 1. Data types
@@ -109,7 +112,7 @@ std::vector<YearCount> countColdDays(const std::vector<Reading>& data)
 
 void plotResults(const std::vector<YearCount>& result)
 {
-    TCanvas canvas;
+    TCanvas canvas("lundColdDaysCanvas", "Cold days in Lund");
     TGraph graph;
 
     for (const YearCount& row : result) {
@@ -139,30 +142,17 @@ void plotResults(const std::vector<YearCount>& result)
     canvas.SaveAs("lund_cold_days.pdf");
 }
 
+}  // namespace
 
-// ============================================================
-// 5. Main
-// ============================================================
-
-int main()
+void PlotLundColdDays(TTree* tree)
 {
-    TFile file("Climate_data_file.root");
-    TTree* tree = nullptr;
-    file.GetObject("tree", tree);  // Get the tree stored under the name "tree"
-
-    if (!tree) {
-        std::cerr << "Could not read the temperature tree.\n";
-        return 1;
-    }
-
-    auto data = readLund(*tree);
-    auto result = countColdDays(data);
+    const auto data = readLund(*tree);
+    const auto result = countColdDays(data);
 
     if (result.size() < 2) {
-        std::cerr << "Need at least two years for a linear fit.\n";
-        return 1;
+        std::cerr << "Need at least two years for the Lund linear fit.\n";
+        return;
     }
 
     plotResults(result);
-    return 0;
 }

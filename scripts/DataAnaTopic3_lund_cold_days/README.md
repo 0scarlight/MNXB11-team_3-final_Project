@@ -12,20 +12,9 @@ Each point represents one year with observations. Missing days are skipped, and 
 
 ## Run in the MNXB11 container
 
-Start in the repository root. The program looks for `Climate_data_file.root` in the working directory. If it is missing from this branch, get the [project data file](https://raw.githubusercontent.com/0scarlight/MNXB11-team_3-final_Project/6661a450235d65cf05ec0867d031ba831a58614b/Climate_data_file.root) with:
+From the repository root, run `make run`. The Makefile builds the shared executable and runs all three analyses using `Climate_data_file.root`.
 
-```bash
-test -f Climate_data_file.root || curl -fL -o Climate_data_file.root https://raw.githubusercontent.com/0scarlight/MNXB11-team_3-final_Project/6661a450235d65cf05ec0867d031ba831a58614b/Climate_data_file.root
-```
-
-Compile and run:
-
-```bash
-g++ $(root-config --cflags) scripts/DataAnaTopic3_lund_cold_days/lund_cold_days.cpp -o lund_cold_days $(root-config --libs) -lTreePlayer
-./lund_cold_days
-```
-
-The program prints the fitted slope and saves `lund_cold_days.png` and `lund_cold_days.pdf` in the working directory. Yearly counts stay in memory.
+The Lund analysis prints the fitted slope and saves `lund_cold_days.png` and `lund_cold_days.pdf` in the working directory. Yearly counts stay in memory.
 
 ## Reference results
 
