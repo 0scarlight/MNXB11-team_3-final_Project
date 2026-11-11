@@ -1,4 +1,4 @@
-#include "lund_cold_days.h"
+#include "cold_day_count.h"
 
 #include <TTree.h>
 #include <TTreeReader.h>
@@ -112,7 +112,7 @@ std::vector<YearCount> countColdDays(const std::vector<Reading>& data)
 
 void plotResults(const std::vector<YearCount>& result)
 {
-    TCanvas canvas("lundColdDaysCanvas", "Cold days in Lund");
+    TCanvas canvas("coldDayCountCanvas", "Cold-Day Count");
     TGraph graph;
 
     for (const YearCount& row : result) {
@@ -138,19 +138,19 @@ void plotResults(const std::vector<YearCount>& result)
     legend.Draw();
 
     std::cout << "Linear trend: " << daysPerDecade << " days per decade\n";
-    canvas.SaveAs("lund_cold_days.png");
-    canvas.SaveAs("lund_cold_days.pdf");
+    canvas.SaveAs("cold_day_count.png");
+    canvas.SaveAs("cold_day_count.pdf");
 }
 
 }  // namespace
 
-void PlotLundColdDays(TTree* tree)
+void PlotColdDayCount(TTree* tree)
 {
     const auto data = readLund(*tree);
     const auto result = countColdDays(data);
 
     if (result.size() < 2) {
-        std::cerr << "Need at least two years for the Lund linear fit.\n";
+        std::cerr << "Need at least two years for the cold-day trend fit.\n";
         return;
     }
 

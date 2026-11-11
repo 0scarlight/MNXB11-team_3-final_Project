@@ -1,25 +1,13 @@
-# MNXB11 Final Project — SMHI Temperature Analysis
+# Introduction:
+This repository contains and documents a solution to the final project of the course MNXB11 given at LU made and implemented by Team 3. The given task was to extract, format, and analyze a data set to extract and represent the data using the ROOT framework.
 
-Team 3 uses historical SMHI observations to analyse temperatures and cold-day trends. See the [Work Plan](Workplan.md) for the workflow and responsibilities, and [the LaTeX report source](LaTeX/main.tex) for the scientific write-up.
+# Project structure: 
+The project has been split into two major parts, with each part subsequently being split into subtasks.  
 
-## Build and run the analyses
+## Data Handling 
+The data handling is the part where the raw data gets vetted and converted into a more manageable format for the data analysis and consists of:
 
-Start in the repository root inside the MNXB11 container. The build uses C++17 and the container's ROOT installation (`root-config --version` shows the installed version). The repository includes `Climate_data_file.root`, the input for all three analyses.
-
-```bash
-make
-./main
-```
-
-From the MNXB11 course host, you can also use `bash scripts/buildproject.sh` and `bash scripts/runproject.sh` to build and run inside the container.
-
-| Analysis | Output in the repository root | Reference results |
-| --- | --- | --- |
-| Mean temperature for each calendar day across years | `daily_mean_over_years.pdf` | [Task 3.2 figures](plots/daily_mean_temperature/) |
-| Temperature distribution for one selected calendar day across years | `day_analysis.pdf` | [Task 3.1 figures](plots/selected_day_temperature/) |
-| Annual count and trend of days with mean temperature below 0 °C in Lund | `lund_cold_days.pdf`, `lund_cold_days.png` | [Topic 3 method](scripts/data_analysis_topic_3.md) and [reference results](plots/lund_cold_days/) |
-
-## Rebuild the analysis input from raw data
+See the [Work Plan](Workplan.md) for the workflow and responsibilities and the [LaTeX report source](LaTeX/main.tex) for the scientific write-up.
 
 ### Data cleaning
 
@@ -35,12 +23,43 @@ The cleaner reads station CSVs from `datasets/` and writes cleaned data to `resu
 
 For a more visual, interactive look at the cleaning process, you can also use the [Python cleaner](scripts/Data%20Cleaning%20-%20py/).
 
-### Convert the cleaned CSVs to ROOT
+### File processing 
+The file processing part converts the outputted cleaned csv-files from the data cleaning part and converts it into a TTree stored in a `.root` file using the class `ClimateData`. 
 
-From the repository root on the MNXB11 course host, run the conversion wrapper. It launches ROOT in the course container and writes `Climate_data_file.root` in the repository root.
+To run the file Processing:
+
+* Locate the cleaned data files that are to be processed
+  * Ensure that all the files are in the same directory
+* Set the `CLEAN_DATA_PATH` in [config.txt](scripts/csv_to_ttree/config.txt) to the directory containing all the data files that are to be processed
+* Add the filenames of all the files to `FILENAMES` in [config.txt](scripts/csv_to_ttree/config.txt)
+* Run the following in the root of this repository:
+```bash
+scripts/csv_to_ttree/process_files.sh
+```
+
+Run the conversion from the MNXB11 course host. If you used the C++ cleaner above, the existing station list is ready to use. Pass the directory containing its cleaned CSVs with:
 
 ```bash
 CLEAN_DATA_PATH=results/data_cleaning/dataset_clean bash scripts/csv_to_ttree/process_files.sh
 ```
 
-[The conversion configuration](scripts/csv_to_ttree/config.txt) already lists the bundled stations. Update the list there if you are using a different set of station files. Once conversion finishes, use the build and run commands above.
+The conversion creates `Climate_data_file.root` in the repository root.
+
+## Data Analysis
+
+The project covers three ways to analyse the data.
+
+Start in the repository root inside the MNXB11 container. The build uses C++17 and the container's ROOT installation (`root-config --version` shows the installed version). The repository includes `Climate_data_file.root`, the input for all three analyses.
+
+```bash
+make
+./main
+```
+
+From the MNXB11 course host, you can also use `bash scripts/buildproject.sh` and `bash scripts/runproject.sh` to build and run inside the container.
+
+| Analysis | Output in the repository root | Reference results |
+| --- | --- | --- |
+| Mean temperature for each calendar day across years | `daily_mean_over_years.pdf` | [Task 3.2 figures](plots/daily_mean_temperature/) |
+| Temperature distribution for one selected calendar day across years | `day_analysis.pdf` | [Task 3.1 figures](plots/selected_day_temperature/) |
+| Cold-Day Count and trend (days with mean temperature below 0 °C) | `cold_day_count.pdf`, `cold_day_count.png` | [Topic 3 method](scripts/data_analysis_topic_3.md) and [reference results](plots/cold_day_count/) |
