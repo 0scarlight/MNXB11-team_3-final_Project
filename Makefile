@@ -8,12 +8,9 @@ ROOTLIBS := $(shell root-config --libs)
 CXXFLAGS := $(CXXWARNINGS) $(CXXSTD) $(CXXOPT) $(INCLUDES) $(ROOTCFLAGS)
 LDLIBS := $(ROOTLIBS) -lTreePlayer
 
-.PHONY: all run clean
+.PHONY: all clean
 
 all: main
-
-run: main
-	./main
 
 main: main.o src/daily_means.o src/day_analysis.o src/lund_cold_days.o
 	$(CXX) $(CXXFLAGS) $(LDFLAGS) -o $@ $^ $(LDLIBS)

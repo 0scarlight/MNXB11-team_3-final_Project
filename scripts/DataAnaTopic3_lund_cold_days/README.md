@@ -12,7 +12,7 @@ Each point represents one year with observations. Missing days are skipped, and 
 
 ## Run in the MNXB11 container
 
-From the repository root, run `make run`. The Makefile builds the shared executable and runs all three analyses using `Climate_data_file.root`.
+Follow the [shared build and run instructions](../../README.md#data-analysis). Running the shared executable runs all three analyses using `Climate_data_file.root`.
 
 The Lund analysis prints the fitted slope and saves `lund_cold_days.png` and `lund_cold_days.pdf` in the working directory. Yearly counts stay in memory.
 

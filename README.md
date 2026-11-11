@@ -42,7 +42,11 @@ The data analysis is where the data actually gets used and represented. This pro
 * The mean temperature of a given day for a given number of years
 * THe amount of days in a year that have a mean temperature below 0°C in a year
 
-To run the data analysis:
-```bash
+From the repository root inside the MNXB11 container, build and run all three analyses with the shared executable:
 
+```bash
+make
+./main
 ```
+
+The executable reads `Climate_data_file.root` from the repository root. If that file needs to be regenerated, follow the data handling steps above. From the course host, the existing wrappers `bash scripts/buildproject.sh` and `bash scripts/runproject.sh` perform the same build and run steps inside the container.
