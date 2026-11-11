@@ -4,6 +4,10 @@ This repository contains and documents the a solution to the final project of th
 # Project structure: 
 The project has been split into two major parts, with each part subsequently being split into subtasks.  
 
+## Proposed Project Workflow
+
+![Proposed workflow for data preparation and analysis](planing_structure/project_workflow.png)
+
 ## Data Handling 
 The data handling is the part where the raw data gets vetted and converted into a more manageable format for the data analysis and consists of:
 
@@ -40,7 +44,7 @@ The data analysis is where the data actually gets used and represented. This pro
 
 * The mean temperature for each day of a given year
 * The mean temperature of a given day for a given number of years
-* THe amount of days in a year that have a mean temperature below 0°C in a year
+* [Data Analysis Topic 3 — Annual cold-day counts in Lund](scripts/data_analysis_topic_3.md)
 
 From the repository root inside the MNXB11 container, build and run all three analyses with the shared executable:
 
