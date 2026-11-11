@@ -62,4 +62,4 @@ From the MNXB11 course host, you can also use `bash scripts/buildproject.sh` and
 | --- | --- | --- |
 | Mean temperature for each calendar day across years | `daily_mean_over_years.pdf` | [Task 3.2 figures](plots/daily_mean_temperature/) |
 | Temperature distribution for one selected calendar day across years | `day_analysis.pdf` | [Task 3.1 figures](plots/selected_day_temperature/) |
-| Cold-Day Count and trend (days with mean temperature below 0 °C) | `cold_day_count.pdf`, `cold_day_count.png` | [Topic 3 method](scripts/data_analysis_topic_3.md) and [reference results](plots/cold_day_count/) |
+| Annual Cold Days (days with mean temperature below 0 °C) | `annual_cold_days.pdf`, `annual_cold_days.png` | [Topic 3 method](scripts/data_analysis_topic_3.md) and [reference results](plots/annual_cold_days/) |

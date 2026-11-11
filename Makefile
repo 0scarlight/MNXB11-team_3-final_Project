@@ -13,7 +13,7 @@ LDLIBS = $(ROOTLIBS) -lTreePlayer
 all: main
 
 main: CXXFLAGS += $(ROOTCFLAGS)
-main: main.o src/daily_means.o src/day_analysis.o src/cold_day_count.o
+main: main.o src/daily_means.o src/day_analysis.o src/annual_cold_days.o
 	$(CXX) $(CXXFLAGS) $(LDFLAGS) -o $@ $^ $(LDLIBS)
 
 CLEANER_DIR := scripts/Data Cleaning - C++
@@ -24,10 +24,10 @@ smhi_cleaner: scripts/Data\ Cleaning\ -\ C++/src/smhi_cleaner_main.cxx \
 	$(CXX) $(CXXFLAGS) -I "$(CLEANER_DIR)/include" $(LDFLAGS) -o $@ \
 	    "$(CLEANER_DIR)/src/smhi_cleaner_main.cxx" "$(CLEANER_DIR)/src/smhi_cleaner.cxx"
 
-main.o: include/daily_means.h include/day_analysis.h include/cold_day_count.h
+main.o: include/daily_means.h include/day_analysis.h include/annual_cold_days.h
 src/daily_means.o: include/daily_means.h
 src/day_analysis.o: include/day_analysis.h
-src/cold_day_count.o: include/cold_day_count.h
+src/annual_cold_days.o: include/annual_cold_days.h
 
 %.o: %.cxx
 	$(CXX) $(CXXFLAGS) -c $< -o $@

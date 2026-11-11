@@ -33,7 +33,7 @@
     <text x="510" y="641" font-size="15" font-weight="400" fill="#17212d">Course Task 3.1</text>
     <rect x="695" y="563" width="310" height="106" fill="#f8fafc" stroke="#334155" stroke-width="1.5"/>
     <text x="850" y="593" font-size="18" font-weight="700" fill="#17212d">Analysis Direction 3 · Jie</text>
-    <text x="850" y="617" font-size="15" font-weight="400" fill="#17212d">Cold-Day Count and Trend</text>
+    <text x="850" y="617" font-size="15" font-weight="400" fill="#17212d">Annual Cold Days</text>
     <text x="850" y="641" font-size="15" font-weight="400" fill="#17212d">Original analysis</text>
   </g>
 </svg>

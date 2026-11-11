@@ -19,7 +19,7 @@ Team 3 — Rebecca Batchelor, Zuzanna (Zuzia) Popek, Jie Qi, and Oscar Tang.
 | --- | --- | --- |
 | 1 — Mean temperature by calendar day (Task 3.2) | Zuzanna Popek | Calculate the mean temperature for each calendar day across the available years and prepare the corresponding [figure](plots/daily_mean_temperature/). |
 | 2 — Temperature distribution for a selected day (Task 3.1) | Rebecca Batchelor | Calculate the temperature distribution for a selected calendar day across years and prepare the [histograms](plots/selected_day_temperature/). |
-| 3 — Cold-Day Count (original analysis) | Jie Qi | Count days with a daily mean below 0 °C for each observed year in the Lund station records, fit the trend, and document the method and [reference results](plots/cold_day_count/). |
+| 3 — Annual Cold Days (original analysis) | Jie Qi | Count days with a daily mean below 0 °C for each observed year in the Lund station records, fit the trend, and document the method and [reference results](plots/annual_cold_days/). |
 
 ## Integration and report
 
