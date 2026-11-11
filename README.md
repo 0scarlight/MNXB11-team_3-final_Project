@@ -4,6 +4,8 @@ This repository contains and documents a solution to the final project of the co
 # Project structure: 
 The project has been split into two major parts, with each part subsequently being split into subtasks.  
 
+**To run the three analyses with the bundled ROOT file**, go directly to [Data Analysis](#data-analysis). Follow the Data Handling steps below only if you want to rebuild that input from the raw SMHI files.
+
 ## Data Handling 
 The data handling is the part where the raw data gets vetted and converted into a more manageable format for the data analysis and consists of:
 
@@ -26,7 +28,7 @@ For a more visual, interactive look at the cleaning process, you can also use th
 ### File processing 
 The file processing part converts the outputted cleaned csv-files from the data cleaning part and converts it into a TTree stored in a `.root` file using the class `ClimateData`. 
 
-To run the file Processing:
+For a custom set of cleaned CSVs, configure the converter as follows:
 
 * Locate the cleaned data files that are to be processed
   * Ensure that all the files are in the same directory
@@ -37,13 +39,13 @@ To run the file Processing:
 scripts/csv_to_ttree/process_files.sh
 ```
 
-The conversion script works on the MNXB11 course host or inside the course container. If you used the C++ cleaner above, the existing station list is ready to use. From the repository root, run:
+**For the bundled stations cleaned with C++ above**, the station list is already configured. Run this command from the repository root on the MNXB11 course host or inside the course container:
 
 ```bash
 CLEAN_DATA_PATH=results/data_cleaning/dataset_clean bash scripts/csv_to_ttree/process_files.sh
 ```
 
-The conversion creates `Climate_data_file.root` in the repository root.
+The conversion regenerates `Climate_data_file.root` in the repository root. Then continue with [Data Analysis](#data-analysis).
 
 ## Data Analysis
 
