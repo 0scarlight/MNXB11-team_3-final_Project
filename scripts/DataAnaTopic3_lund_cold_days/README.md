@@ -2,7 +2,7 @@
 
 How many days each year had a mean temperature below 0 °C in Lund? The fitted trend in the available records is **1.32 fewer cold days per decade**.
 
-![Annual cold days in Lund and their linear trend](reference_plot.png)
+![Annual cold days in Lund and their linear trend](../../plots/lund_cold_days/reference_plot.png)
 
 ## How the count works
 
@@ -18,4 +18,4 @@ The Lund analysis prints the fitted slope and saves `lund_cold_days.png` and `lu
 
 ## Reference results
 
-The [yearly counts](lund_cold_days.csv) cover 244 years with observations between 1780 and 2026. The preview above and its [PDF version](reference_plot.pdf) were plotted separately from those counts. Running the C++ program draws the data using ROOT's default style.
+The [yearly counts](lund_cold_days.csv) cover 244 years with observations between 1780 and 2026. The preview above and its [PDF version](../../plots/lund_cold_days/reference_plot.pdf) were plotted separately from those counts. Running the C++ program draws the data using ROOT's default style.
