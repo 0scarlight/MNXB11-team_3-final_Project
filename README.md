@@ -13,19 +13,29 @@ The data handling is the part where the raw data gets vetted and converted into 
 
 ### Data Cleaning
 
-Both methods use the same four coarse checks for the SMHI observations.
-
-**Method 1 — C++ batch cleaning.** From the repository root, extract the archive into `datasets/` if you have not done so already, then compile and run the cleaner:
+Choose C++ for batch cleaning or Python for interactive inspection. From the repository root, extract the station CSVs into `datasets/` once:
 
 ```bash
 tar -xzf datasets/datasets.tgz -C datasets
+```
+
+**C++ batch cleaning.** In the MNXB11 container, build and run the standalone cleaner from the repository root:
+
+```bash
 make smhi_cleaner
 ./smhi_cleaner
 ```
 
-The executable reads the extracted station CSVs from `datasets/` and its subdirectories. It writes cleaned CSVs to `results/data_cleaning/dataset_clean/` and deletion logs to `results/data_cleaning/removed_records/`. See the [C++ guide](scripts/Data%20Cleaning%20-%20C%2B%2B/README.md) for custom paths and output details.
+Cleaned CSVs and deletion logs go to `results/data_cleaning/dataset_clean/` and `results/data_cleaning/removed_records/`. See the [C++ guide](scripts/Data%20Cleaning%20-%20C%2B%2B/README.md).
 
-**Method 2 — Interactive Python cleaning.** Use the original Python script to inspect the raw observations interactively, explore suspicious points on plots, and clean a selected station. See the [Python guide](scripts/Data%20Cleaning%20-%20py/README.md) for setup and usage.
+**Optional: interactive Python cleaning.** To explore the observations and cleaning flags in interactive plots, install the dependencies and set `file_path` in the script to the extracted station CSV, using a path relative to the repository root or an absolute path. Run from the repository root:
+
+```bash
+python -m pip install pandas matplotlib numpy
+python "scripts/Data Cleaning - py/smhi_cleaner_four_steps.py"
+```
+
+See the [Python guide](scripts/Data%20Cleaning%20-%20py/README.md).
 
 ### File processing 
 The file processing part converts the outputted cleaned csv-files from the data cleaning part and converts it into a TTree stored in a `.root` file using the class `ClimateData`. 
