@@ -1,5 +1,7 @@
 # SMHI Temperature Data Cleaning in C++
 
+The batch cleaner is part of Data Handling. Its [header](../../include/smhi_cleaner.h) is in `include/`, and its [implementation](../../src/smhi_cleaner.cxx) and [command-line entry point](../../src/smhi_cleaner_main.cxx) are in `src/`. The cleaner runs as a separate executable before CSV-to-ROOT conversion when preparing fresh data.
+
 ## Run the batch cleaner
 
 Run these commands from the repository root inside the MNXB11 container. The archive lives at `datasets/datasets.tgz`. The `-C datasets` option extracts the station CSVs into `datasets/`. Skip the extraction command if the CSVs are already there. The cleaner searches this directory recursively and reads the extracted files.
