@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1020" height="688" viewBox="0 0 1020 688" role="img" aria-labelledby="title desc">
+  <title id="title">MNXB11 Team 3 project workflow</title>
+  <desc id="desc">Jie cleans raw SMHI data. Oscar converts cleaned CSV files to a ROOT TTree. Zuzia, Rebecca and Jie use that tree for three separate analyses.</desc>
+  <rect width="1020" height="688" fill="#ffffff"/>
+  <g fill="none" stroke="#334155" stroke-width="1.7">
+    <path d="M510 75V98 M510 165V188 M510 245V268 M510 335V358 M510 415V438"/>
+    <path d="M510 505V563 M170 563V534H850V563"/>
+  </g>
+  <path d="M505 90h10l-5 8z M505 180h10l-5 8z M505 260h10l-5 8z M505 350h10l-5 8z M505 430h10l-5 8z M505 555h10l-5 8z M165 555h10l-5 8z M845 555h10l-5 8z" fill="#334155"/>
+  <g font-family="Arial, Helvetica, sans-serif" text-anchor="middle">
+    <rect x="349" y="18" width="322" height="57" fill="#f8fafc" stroke="#334155" stroke-width="1.5"/>
+    <text x="510" y="52" font-size="18" font-weight="700" fill="#17212d">Raw SMHI temperature observations</text>
+    <rect x="349" y="98" width="322" height="67" fill="#f8fafc" stroke="#334155" stroke-width="1.5"/>
+    <text x="510" y="125" font-size="18" font-weight="700" fill="#17212d">Coarse Cleaning</text>
+    <text x="510" y="149" font-size="15" font-weight="400" fill="#17212d">Jie</text>
+    <rect x="349" y="188" width="322" height="57" fill="#f8fafc" stroke="#334155" stroke-width="1.5"/>
+    <text x="510" y="222" font-size="18" font-weight="700" fill="#17212d">Cleaned CSV files</text>
+    <rect x="349" y="268" width="322" height="67" fill="#f8fafc" stroke="#334155" stroke-width="1.5"/>
+    <text x="510" y="295" font-size="18" font-weight="700" fill="#17212d">CSV to ROOT TTree</text>
+    <text x="510" y="319" font-size="15" font-weight="400" fill="#17212d">Oscar</text>
+    <rect x="349" y="358" width="322" height="57" fill="#f8fafc" stroke="#334155" stroke-width="1.5"/>
+    <text x="510" y="392" font-size="18" font-weight="700" fill="#17212d">Climate_data_file.root</text>
+    <rect x="349" y="438" width="322" height="67" fill="#e8eef5" stroke="#334155" stroke-width="1.5"/>
+    <text x="510" y="465" font-size="18" font-weight="700" fill="#17212d">Data Analysis</text>
+    <text x="510" y="489" font-size="15" font-weight="400" fill="#17212d">Zuzia, Rebecca, Jie</text>
+    <rect x="15" y="563" width="310" height="106" fill="#f8fafc" stroke="#334155" stroke-width="1.5"/>
+    <text x="170" y="593" font-size="18" font-weight="700" fill="#17212d">Analysis Direction 1 · Zuzia</text>
+    <text x="170" y="617" font-size="15" font-weight="400" fill="#17212d">Mean temperature by calendar day</text>
+    <text x="170" y="641" font-size="15" font-weight="400" fill="#17212d">Course Task 3.2</text>
+    <rect x="355" y="563" width="310" height="106" fill="#f8fafc" stroke="#334155" stroke-width="1.5"/>
+    <text x="510" y="593" font-size="18" font-weight="700" fill="#17212d">Analysis Direction 2 · Rebecca</text>
+    <text x="510" y="617" font-size="15" font-weight="400" fill="#17212d">Selected-day temperature distribution</text>
+    <text x="510" y="641" font-size="15" font-weight="400" fill="#17212d">Course Task 3.1</text>
+    <rect x="695" y="563" width="310" height="106" fill="#f8fafc" stroke="#334155" stroke-width="1.5"/>
+    <text x="850" y="593" font-size="18" font-weight="700" fill="#17212d">Analysis Direction 3 · Jie</text>
+    <text x="850" y="617" font-size="15" font-weight="400" fill="#17212d">Annual cold-day trend in Lund</text>
+    <text x="850" y="641" font-size="15" font-weight="400" fill="#17212d">Original analysis</text>
+  </g>
+</svg>

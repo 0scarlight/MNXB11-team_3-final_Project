@@ -6,7 +6,7 @@ The project has been split into two major parts, with each part subsequently bei
 
 ## Proposed Project Workflow
 
-![Proposed workflow for data preparation and analysis](planing_structure/project_workflow.png)
+![Proposed workflow for data preparation and analysis](planing_structure/project_workflow.svg)
 
 ## Data Handling 
 The data handling is the part where the raw data gets vetted and converted into a more manageable format for the data analysis and consists of:
@@ -42,9 +42,9 @@ scripts/csv_to_ttree/process_files.sh
 ## Data Analysis
 The data analysis is where the data actually gets used and represented. This project covers 3 different ways to analyze the data, those being:
 
-* The mean temperature for each day of a given year
-* The mean temperature of a given day for a given number of years
-* [Data Analysis Topic 3 — Annual cold-day counts in Lund](scripts/data_analysis_topic_3.md)
+1. Zuzia — Mean temperature for each calendar day across years ([Task 3.2 figures](plots/daily_mean_temperature/)).
+2. Rebecca — Temperature distribution for a selected calendar day across years ([Task 3.1 figures](plots/selected_day_temperature/)).
+3. Jie — [Annual cold-day trend in Lund](scripts/data_analysis_topic_3.md) ([figures and data](plots/lund_cold_days/)).
 
 From the repository root inside the MNXB11 container, build and run all three analyses with the shared executable:
 
