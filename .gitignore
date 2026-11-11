@@ -44,8 +44,9 @@ results/*
 # Don't add the argumentum library to git
 argumentum*
 
-# Don't add the main executable to git
+# Don't add the project executables to git
 main
+/smhi_cleaner
 
 # Ignore the uncompressed datasets
 datasets/*
@@ -53,8 +54,11 @@ datasets/*
 # Ignore the testing folder
 planing_structure/testing/*
 
-# Ignore changes to the cleaning scripts
-scripts/data_cleaning/*
+# Ignore generated files from interactive cleaning
+/scripts/Data Cleaning - py/*_Clean.csv
+/scripts/Data Cleaning - py/*_removed_records.csv
+/scripts/Data Cleaning - py/*_suspicious_records.csv
+/scripts/Data Cleaning - py/dataset_clean/
 
 # Ignore file generated during the LaTeX compilation
 LaTeX/*.aux

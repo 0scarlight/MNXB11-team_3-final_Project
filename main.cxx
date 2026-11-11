@@ -1,6 +1,6 @@
 #include "daily_means.h"
 #include "day_analysis.h"
-#include "lund_cold_days.h"
+#include "annual_cold_days.h"
 
 #include <TFile.h>
 #include <TTree.h>
@@ -23,7 +23,7 @@ int main()
     }
 
     PlotDailyMean(tree);
-    PlotLundColdDays(tree);
+    PlotAnnualColdDays(tree);
     DayHistogram(tree, "Falsterbo", 6, 30);
     return 0;
 }
