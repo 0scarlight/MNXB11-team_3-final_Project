@@ -37,7 +37,7 @@ To run the file Processing:
 scripts/csv_to_ttree/process_files.sh
 ```
 
-Run the conversion from the MNXB11 course host. If you used the C++ cleaner above, the existing station list is ready to use. Pass the directory containing its cleaned CSVs with:
+The conversion script works on the MNXB11 course host or inside the course container. If you used the C++ cleaner above, the existing station list is ready to use. From the repository root, run:
 
 ```bash
 CLEAN_DATA_PATH=results/data_cleaning/dataset_clean bash scripts/csv_to_ttree/process_files.sh
@@ -52,11 +52,10 @@ The project covers three ways to analyse the data.
 Start in the repository root inside the MNXB11 container. The build uses C++17 and the container's ROOT installation (`root-config --version` shows the installed version). The repository includes `Climate_data_file.root`, the input for all three analyses.
 
 ```bash
-make
-./main
+make && ./main
 ```
 
-From the MNXB11 course host, you can also use `bash scripts/buildproject.sh` and `bash scripts/runproject.sh` to build and run inside the container.
+From the MNXB11 course host, run `bash scripts/buildproject.sh && bash scripts/runproject.sh` to build and run inside the container.
 
 | Analysis | Output in the repository root | Reference results |
 | --- | --- | --- |
