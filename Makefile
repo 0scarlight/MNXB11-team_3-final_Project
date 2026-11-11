@@ -16,10 +16,14 @@ main: CXXFLAGS += $(ROOTCFLAGS)
 main: main.o src/daily_means.o src/day_analysis.o src/lund_cold_days.o
 	$(CXX) $(CXXFLAGS) $(LDFLAGS) -o $@ $^ $(LDLIBS)
 
-smhi_cleaner: src/smhi_cleaner_main.o src/smhi_cleaner.o
-	$(CXX) $(CXXFLAGS) $(LDFLAGS) -o $@ $^
+CLEANER_DIR := scripts/Data Cleaning - C++
 
-src/smhi_cleaner_main.o src/smhi_cleaner.o: include/smhi_cleaner.h
+smhi_cleaner: scripts/Data\ Cleaning\ -\ C++/src/smhi_cleaner_main.cxx \
+              scripts/Data\ Cleaning\ -\ C++/src/smhi_cleaner.cxx \
+              scripts/Data\ Cleaning\ -\ C++/include/smhi_cleaner.h
+	$(CXX) $(CXXFLAGS) -I "$(CLEANER_DIR)/include" $(LDFLAGS) -o $@ \
+	    "$(CLEANER_DIR)/src/smhi_cleaner_main.cxx" "$(CLEANER_DIR)/src/smhi_cleaner.cxx"
+
 main.o: include/daily_means.h include/day_analysis.h include/lund_cold_days.h
 src/daily_means.o: include/daily_means.h
 src/day_analysis.o: include/day_analysis.h

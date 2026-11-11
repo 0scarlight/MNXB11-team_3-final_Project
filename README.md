@@ -11,9 +11,11 @@ The project has been split into two major parts, with each part subsequently bei
 ## Data Handling 
 The data handling is the part where the raw data gets vetted and converted into a more manageable format for the data analysis and consists of:
 
-### Data cleaning
+### Data Cleaning
 
-From the repository root in the MNXB11 container, extract the raw data once if needed, then build and run the C++17 batch cleaner:
+Both methods use the same four coarse checks for the SMHI observations.
+
+**Method 1 — C++ batch cleaning.** From the repository root, extract the archive into `datasets/` if you have not done so already, then compile and run the cleaner:
 
 ```bash
 tar -xzf datasets/datasets.tgz -C datasets
@@ -21,7 +23,9 @@ make smhi_cleaner
 ./smhi_cleaner
 ```
 
-The cleaner reads station CSVs from `datasets/` and writes cleaned CSVs to `results/data_cleaning/dataset_clean/` and deletion logs to `results/data_cleaning/removed_records/`. See the [data-cleaning guide](scripts/data_cleaning/README.md#run-the-batch-cleaner) for custom paths, the four checks, and the original Python version.
+The executable reads the extracted station CSVs from `datasets/` and its subdirectories. It writes cleaned CSVs to `results/data_cleaning/dataset_clean/` and deletion logs to `results/data_cleaning/removed_records/`. See the [C++ guide](scripts/Data%20Cleaning%20-%20C%2B%2B/README.md) for custom paths and output details.
+
+**Method 2 — Interactive Python cleaning.** Use the original Python script to inspect the raw observations interactively, explore suspicious points on plots, and clean a selected station. See the [Python guide](scripts/Data%20Cleaning%20-%20py/README.md) for setup and usage.
 
 ### File processing 
 The file processing part converts the outputted cleaned csv-files from the data cleaning part and converts it into a TTree stored in a `.root` file using the class `ClimateData`. 
@@ -30,7 +34,7 @@ To run the file Processing:
 
 * Locate the cleaned data files that are to be processed
   * Ensure that all the files are in the same directory
-* Set `CLEAN_DATA_PATH` to the cleaned CSV directory, as shown below. The default in [config.txt](scripts/csv_to_ttree/config.txt) still points to the earlier cleaned dataset.
+* Set `CLEAN_DATA_PATH` to the cleaned CSV directory, as shown below. The default in [config.txt](scripts/csv_to_ttree/config.txt) points to the Python cleaning folder’s `dataset_clean/` directory.
 * Add the filenames of all the files to `FILENAMES` in [config.txt](scripts/csv_to_ttree/config.txt)
 * Run the following in the root of this repository:
 ```bash
