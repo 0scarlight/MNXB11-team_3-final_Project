@@ -13,29 +13,17 @@ The data handling is the part where the raw data gets vetted and converted into 
 
 ### Data Cleaning
 
-Choose C++ for batch cleaning or Python for interactive inspection. From the repository root, extract the station CSVs into `datasets/` once:
+The C++ batch cleaner runs four quality checks on the SMHI station data. From the repository root in the MNXB11 container, extract the archive if needed, then build and run the cleaner:
 
 ```bash
 tar -xzf datasets/datasets.tgz -C datasets
-```
-
-**C++ batch cleaning.** In the MNXB11 container, build and run the standalone cleaner from the repository root:
-
-```bash
 make smhi_cleaner
 ./smhi_cleaner
 ```
 
-Cleaned CSVs and deletion logs go to `results/data_cleaning/dataset_clean/` and `results/data_cleaning/removed_records/`. See the [C++ guide](scripts/Data%20Cleaning%20-%20C%2B%2B/README.md).
+The cleaner reads station CSVs from `datasets/` and writes cleaned data to `results/data_cleaning/dataset_clean/` and deletion logs to `results/data_cleaning/removed_records/`. See the [C++ guide](scripts/Data%20Cleaning%20-%20C%2B%2B/README.md) for details.
 
-**Optional: interactive Python cleaning.** To explore the observations and cleaning flags in interactive plots, install the dependencies and set `file_path` in the script to the extracted station CSV, using a path relative to the repository root or an absolute path. Run from the repository root:
-
-```bash
-python -m pip install pandas matplotlib numpy
-python "scripts/Data Cleaning - py/smhi_cleaner_four_steps.py"
-```
-
-See the [Python guide](scripts/Data%20Cleaning%20-%20py/README.md).
+For a more visual, interactive look at the cleaning process, you can also use the [Python cleaner](scripts/Data%20Cleaning%20-%20py/).
 
 ### File processing 
 The file processing part converts the outputted cleaned csv-files from the data cleaning part and converts it into a TTree stored in a `.root` file using the class `ClimateData`. 
