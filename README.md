@@ -12,17 +12,16 @@ The project has been split into two major parts, with each part subsequently bei
 The data handling is the part where the raw data gets vetted and converted into a more manageable format for the data analysis and consists of:
 
 ### Data cleaning
-Checks through the raw data and removes any files suspicious entries. 
 
-To run the data cleaning:
+From the repository root in the MNXB11 container, extract the raw data once if needed, then build and run the C++17 batch cleaner:
 
-* Ensure that all the prerequisite python libraries are installed
-* Set the the path to the raw dataset in the [smhi_cleaner_four_steps.py](scripts/data_cleaning/smhi_cleaner_four_steps.py) script
-  * Optionally change the limits set in the script
-* Run:
 ```bash
-python scripts/data_cleaning/smhi_cleaner_four_steps.py
+tar -xzf datasets/datasets.tgz -C datasets
+make smhi_cleaner
+./smhi_cleaner
 ```
+
+The cleaner reads station CSVs from `datasets/` and writes cleaned CSVs to `results/data_cleaning/dataset_clean/` and deletion logs to `results/data_cleaning/removed_records/`. See the [data-cleaning guide](scripts/data_cleaning/README.md#run-the-batch-cleaner) for custom paths, the four checks, and the original Python version.
 
 ### File processing 
 The file processing part converts the outputted cleaned csv-files from the data cleaning part and converts it into a TTree stored in a `.root` file using the class `ClimateData`. 
@@ -31,11 +30,11 @@ To run the file Processing:
 
 * Locate the cleaned data files that are to be processed
   * Ensure that all the files are in the same directory
-* Set the `CLEAN_DATA_PATH` in [config.txt](scripts/csv_to_ttree/config.txt) to the directory containing all the data files that are to be processed
+* Set `CLEAN_DATA_PATH` to the cleaned CSV directory, as shown below. The default in [config.txt](scripts/csv_to_ttree/config.txt) still points to the earlier cleaned dataset.
 * Add the filenames of all the files to `FILENAMES` in [config.txt](scripts/csv_to_ttree/config.txt)
 * Run the following in the root of this repository:
 ```bash
-scripts/csv_to_ttree/process_files.sh
+CLEAN_DATA_PATH=results/data_cleaning/dataset_clean bash scripts/csv_to_ttree/process_files.sh
 ```
 
 

@@ -78,3 +78,11 @@ YYYY-MM-DD Name LastName  <email@somewhere>
 	* Implemented a function csvCleaner in planing_structure/testing/src/file_processing.cxx: converts the formatted data in the raw dataset to a more convenient format and store it in a csv-file
 	* Implemented the class "ClimateData" for future use in a TTree
 
+2026-11-11 Jie Qi
+
+	Added a standalone C++17 batch implementation of coarse SMHI data cleaning.
+
+	* Preserve the Python validation and deletion-log format while processing all
+	  standard station CSVs in one invocation.
+	* Write cleaned data and deletion logs to separate output directories and
+	  document how to pass the cleaned data to the ROOT conversion.

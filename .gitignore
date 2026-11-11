@@ -44,8 +44,9 @@ results/*
 # Don't add the argumentum library to git
 argumentum*
 
-# Don't add the main executable to git
+# Don't add the project executables to git
 main
+/smhi_cleaner
 
 # Ignore the uncompressed datasets
 datasets/*
