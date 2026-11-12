@@ -1,0 +1,20 @@
+\subsection{Annual cold days in Lund}
+\label{sec:cold}
+We chose Lund for its long local record and asked whether days with a mean temperature below \(0\degC\) have become less frequent. \texttt{PlotAnnualColdDays} reads the Lund entries with \texttt{TTreeReader} and groups the chronological observations by date. The code rounds each reading to tenths of a degree and sums the resulting integers so that opposite readings at that precision cancel exactly. The sum and mean have the same sign, so a date counts once if its sum is negative. An exact zero is excluded.
+
+For each year \(y\), the count is
+\[
+   C_y=\sum_{d\in D_y}\mathbf{1}\{\bar T_{y,d}<0\degC\},
+\]
+where \(D_y\) is the set of dates with at least one retained observation in that year. The program plots one point per observed year and fits a straight line with ROOT's \texttt{TGraph::Fit("pol1")}. Multiplying the slope per year by ten expresses the change in days per decade.
+
+\begin{figure}[htbp]
+\centering
+\projectplot{annual_cold_days/reference_plot.pdf}
+\caption{Annual cold days in Lund and the least-squares trend, plotted from the archived yearly counts. Each point represents one observed year. The years 1958--1960 have no points, and years with partial coverage remain in the series.}
+\label{fig:cold}
+\end{figure}
+
+The reference series contains 244 annual counts spanning 1780--2026. Its fitted slope is \(-1.32\) cold days per decade and the linear fit accounts for about \(17\%\) of the variation in annual counts (\(R^2=0.169\), calculated from the archived CSV). The count reached 118 in 1799 and fell to 7 in both 1957 and 2020. Counts still vary markedly in recent decades, including 103 cold days in 2010. The line in Figure~\ref{fig:cold} therefore summarises a long-term decrease alongside substantial year-to-year variation.
+
+Years with no observations are omitted, including 1958--1960. This short gap is easy to miss on a plot spanning nearly 250 years. For partially observed years, missing days can lower the count, especially if the missing period falls in a cold season. As a check on the final year, we recalculated the fit from the archived counts through 2025 and obtained \(-1.32\) days per decade to two decimal places. This tests the influence of the endpoint only. A broader sensitivity test would compare seasons or years with similar observational coverage and sampling schedules. The fitted slope describes the available Lund record.

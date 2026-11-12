@@ -1,0 +1,20 @@
+\subsection{Falsterbo's seasonal temperature cycle}
+\label{sec:seasonal}
+Task 3.2 asks how the typical daily temperature and its variability change over the calendar year. In \texttt{CalculateDailyMean}, ROOT selects Falsterbo observations and the program accumulates temperature sums and counts in arrays indexed by year and calendar day. A 365-day calendar omits 29 February so that a given index refers to the same date in every year.
+
+For year \(y\) and calendar day \(d\), let \(n_{y,d}\) be the number of available readings and \(T_{y,d,i}\) their temperatures. The program first computes a mean for each observed date and then averages those means across the years \(Y_d\) with observations on that date:
+\[
+  \bar T_{y,d}=\frac{1}{n_{y,d}}\sum_{i=1}^{n_{y,d}}T_{y,d,i},
+  \qquad
+  \mu_d=\frac{1}{|Y_d|}\sum_{y\in Y_d}\bar T_{y,d}.
+\]
+This gives each observed year equal weight for a given date, even when some years have more measurements per day. The spread of the yearly means is calculated with ROOT's \texttt{TMath::RMS}. The \texttt{PlotDailyMean} function stores the mean and spread in the content and error of each \texttt{TH1D} bin and draws them on a ROOT canvas.
+
+\begin{figure}[htbp]
+\centering
+\projectplot{daily_mean_temperature/daily_mean_over_years.pdf}
+\caption{Mean daily temperature in Falsterbo across the calendar year. Each point combines the available yearly daily means for one date. The bars show the year-to-year standard deviation for that date. Day 1 is 1 January.}
+\label{fig:seasonal}
+\end{figure}
+
+Figure~\ref{fig:seasonal} shows a clear seasonal cycle. Average temperatures rise from winter through spring, peak in summer and fall through autumn. The spread is generally larger in winter, so the difference between two winters can be substantial even on the same calendar date. The bars measure historical variability. An uncertainty on \(\mu_d\) would require accounting for the number of contributing years and any dependence between observations.

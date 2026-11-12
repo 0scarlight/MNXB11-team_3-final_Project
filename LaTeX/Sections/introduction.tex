@@ -1,0 +1,34 @@
+\section{Introduction}
+A temperature archive can answer different questions depending on how the observations are grouped. Grouping by calendar day reveals the seasonal cycle. Keeping just one calendar day shows how much its temperature varies from year to year. Counting days below a fixed threshold gives a measure that can be compared across years. We apply these three approaches to historical air-temperature observations from the Swedish Meteorological and Hydrological Institute (SMHI) \cite{smhi,instructions}. The first two analyses use Falsterbo and follow Tasks 3.2 and 3.1 of the course instructions. The annual count of days below freezing in Lund is our original analysis.
+
+The course archive includes station-specific CSV files with metadata, observation dates and UTC times, air temperatures, and quality markers. We retain the original files, write cleaned copies and deletion logs, and convert the retained measurements into a shared ROOT tree \cite{root,repo}. Each analysis then selects the station and dates it needs from the same data structure (Figure~\ref{fig:workflow}).
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+  stage/.style={draw=blue!55!black, fill=blue!4, rounded corners=2pt, align=center, minimum height=9mm, font=\small, inner sep=4pt},
+  result/.style={stage, draw=teal!65!black, fill=teal!6, text width=35mm},
+  flow/.style={-{Stealth[length=2mm]}, semithick, draw=black!70}
+]
+\node[stage] (raw) {SMHI station CSVs};
+\node[stage, right=6mm of raw] (clean) {Cleaned CSVs\\and deletion logs};
+\node[stage, right=6mm of clean] (tree) {ROOT \texttt{TTree}};
+\node[result, below=12mm of clean] (day) {30 June distribution\\Falsterbo};
+\node[result, left=3mm of day] (cycle) {Seasonal cycle\\Falsterbo};
+\node[result, right=3mm of day] (cold) {Annual cold days\\Lund};
+\draw[flow] (raw) -- (clean);
+\draw[flow] (clean) -- (tree);
+\coordinate (split) at ([yshift=5mm]day.north);
+\draw[semithick, draw=black!70] (tree.south) |- (split);
+\draw[flow] (split) -| (cycle.north);
+\draw[flow] (split) -- (day.north);
+\draw[flow] (split) -| (cold.north);
+\end{tikzpicture}
+\caption{Project workflow from the source files to three analyses. The cleaned CSVs feed the ROOT conversion. The deletion logs preserve the evidence for the cleaning decisions.}
+\label{fig:workflow}
+\end{figure}
+
+\subsection{Team organisation and version control}
+Jie Qi developed the cleaning tools and the Lund cold-day analysis. Oscar Tang developed the CSV-to-ROOT conversion and its batch script. Zuzanna Popek developed the calendar-day climatology, and Rebecca Batchelor developed the selected-day distribution. The team integrated the three analyses into a shared executable and recorded responsibilities in the repository work plan \cite{repo}.
+
+We used a shared repository with team members as collaborators, corresponding to Policy B in the course instructions. Working on development branches allowed members to edit independent modules in parallel and integrate through GitHub pull requests. Direct collaborator access made it possible to share and test changes without requiring the release manager to push each contribution on behalf of its author.
