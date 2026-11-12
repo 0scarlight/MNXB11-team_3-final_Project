@@ -1,0 +1,22 @@
+\subsection{Temperature distribution on 30 June in Falsterbo}
+\label{sec:selected}
+Task 3.1 asks what range of temperatures is typical on a particular date. Rebecca's analysis uses 30 June in Falsterbo. \texttt{dailyMeansPerYear} uses a ROOT \texttt{TEntryList} to select the station, month and day and groups the retained observations by year. The current default interval is 1880--2025. Each year with observations contributes one mean temperature, so a year with more readings on 30 June contributes the same weight as a year with fewer.
+
+\begin{figure}[htbp]
+\centering
+\projectplot{selected_day_temperature/Hist_3_with_line.pdf}
+\caption{Archived Falsterbo histogram for 30 June with a Gaussian overlay. The entries are daily means from individual years. The curve summarizes the centre and spread of the observed distribution.}
+\label{fig:selected}
+\end{figure}
+
+The histogram in Figure~\ref{fig:selected} shows that the temperature on 30 June varies appreciably across years, with most entries concentrated near the centre and fewer toward the tails. This is the distribution underlying one calendar date in the seasonal analysis. The current \texttt{DayHistogram} implementation fills a \texttt{TH1D} with 100 bins over \(5\) to \(30\degC\). It uses the histogram mean \(\hat\mu\) and standard deviation \(\hat\sigma\) to parameterise a Gaussian overlay. The expected curve height scales with the number of observations and the bin width, so it is expressed in the same units as the histogram.
+
+The program also compares two estimates for the probability of a mean temperature between \(16\) and \(18\degC\). The empirical estimate divides the number of yearly daily means in \([16,18)\degC\) by the number available. The Gaussian estimate integrates the model over the same interval:
+\[
+  \hat p_{\rm emp}=\frac{\#\{y:16\leq\bar T_{y,d}<18\}}{|Y_d|},
+  \qquad
+  \hat p_{\rm G}=
+    \Phi\!\left(\frac{18-\hat\mu}{\hat\sigma}\right)
+   -\Phi\!\left(\frac{16-\hat\mu}{\hat\sigma}\right).
+\]
+Here \(\Phi\) is the standard normal cumulative distribution. The empirical estimate describes the recorded sample. The Gaussian estimate smooths the distribution and also supplies a model-based upper-tail probability for \(T>20\degC\). Both pool the available years, so interpreting them as forecasts would require assessing whether the distribution is stable over time.

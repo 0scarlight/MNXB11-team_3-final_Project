@@ -1,0 +1,25 @@
+\subsection{Data cleaning}
+\label{sec:cleaning}
+
+The cleaner processes the 11 standard station CSVs in the course archive. The files combine measurement records with metadata and use semicolon-separated fields. The C++17 batch cleaner checks measurement rows in the order in which SMHI supplied them. Table~\ref{tab:checks} shows the four criteria. A row is removed if it fails one or more criteria.
+
+\begin{table}[htbp]
+\centering
+\small
+\begin{tabularx}{\linewidth}{@{}p{.25\linewidth}X@{}}
+\toprule
+Check & Criterion for flagging a measurement row \\
+\midrule
+Field format & The date, UTC time or numerical temperature cannot be parsed in the expected format. \\
+Timestamp order & The timestamp repeats or precedes that of the preceding raw row, when both timestamps are valid. \\
+Temperature-change rate & The absolute change exceeds \(3\degC\) per hour, using the elapsed time between consecutive raw rows with valid temperatures and a positive time difference. \\
+Temperature range & The recorded temperature is outside the inclusive interval \([-45,35]\degC\). \\
+\bottomrule
+\end{tabularx}
+\caption{Coarse-cleaning rules used by the batch cleaner. The rate threshold uses the actual observation interval in hours.}
+\label{tab:checks}
+\end{table}
+
+Both pairwise checks refer to adjacent rows in the original sequence, including cases where the preceding row has itself been flagged. This keeps the decision for each pair traceable to the source file. The cleaned copies retain the metadata and unflagged rows. A separate CSV per station records the original line number, date, UTC time, temperature, applicable error codes and complete original row. The optional Python tool exposes the same checks and plots the raw temperature, sampling interval, temperature difference and rate of change for interactive inspection.
+
+The thresholds are project choices for coarse screening. Rapid genuine changes can exceed \(3\degC\) per hour, and a bad measurement can cause the following valid measurement to fail the pairwise rate check. Sampling schedules also vary over time. A long interval can reflect either a change in sampling or missing observations. The pipeline leaves such gaps in place, so daily averages are averages of available readings and can be sensitive to the times sampled.

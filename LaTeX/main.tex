@@ -14,13 +14,12 @@
     filecolor=blue,     % Color of file links
     urlcolor=black          % Color of external links
 }
-\usepackage{longtable}
-\usepackage{caption}
-\usepackage{fancyhdr}
-\usepackage{datetime2}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{tikz}
+\usetikzlibrary{positioning,arrows.meta}
+\usepackage{placeins}
 \usepackage{setspace}
-\usepackage{subfiles} 
-
 \title{MNXB11 Final Project Report}
 \author{\textbf{Team 3:}\\
 Rebecca Batchelor, \\ 
@@ -30,19 +29,42 @@ Oscar Tang
 }
 \date{\today}
 
-\onehalfspacing
+\setstretch{1.12}
+\newcommand{\degC}{\,{}^\circ\mathrm{C}}
+\newcommand{\projectplot}[1]{%
+  \IfFileExists{../plots/#1}{%
+    \includegraphics[width=.91\linewidth,height=.40\textheight,keepaspectratio]{../plots/#1}%
+  }{%
+    \includegraphics[width=.91\linewidth,height=.40\textheight,keepaspectratio]{plots/#1}%
+  }%
+}
+\makeatletter
+\def\input@path{{LaTeX/}}
+\makeatother
 
 \begin{document}
+\pagenumbering{roman}
 \maketitle
-
-\newpage
-
+\thispagestyle{empty}
+\clearpage
 \tableofcontents
+\clearpage
+\pagenumbering{arabic}
 
-\newpage
-\setcounter{page}{1}
+\input{Sections/introduction.tex}
+\FloatBarrier
+\section{Data handling}
+\input{Sections/data_cleaning.tex}
+\input{Sections/file_processing.tex}
+\FloatBarrier
+\section{Data analysis}
+\input{Sections/calendar_day_means.tex}
+\FloatBarrier
+\input{Sections/selected_day_temperature.tex}
+\FloatBarrier
+\input{Sections/annual_cold_days.tex}
+\FloatBarrier
+\input{Sections/conclusion.tex}
+\input{Sections/references.tex}
 
-% \section*{SECTIONNAME}
-% \subfile{Sections/SUBFILENAME}
-\subfile{Sections/Task 3_2.tex}
 \end{document}

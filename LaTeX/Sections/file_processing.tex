@@ -1,0 +1,17 @@
+\subsection{File processing and reproducibility}
+The Bash driver reads a configured list of cleaned station files and checks their availability before invoking ROOT. The \texttt{createTTree.C} macro passes the list to \texttt{csvToTree}. The converter selects rows with SMHI quality markers \texttt{G} or \texttt{Y}, parses the date, UTC time and temperature fields, and obtains the station name from the cleaned filename. Each accepted row becomes a \texttt{ClimateData} entry in \texttt{tree} within \texttt{Climate\_data\_file.root}. The tree exposes the station name, year, month, day, hour, minute, second and temperature as fields. Keeping a common schema lets all three analyses use the same input while applying different station and calendar selections.
+
+From the repository root in the MNXB11 course environment, the data can be rebuilt and analysed with the commands below. The archive extraction is needed when the raw station CSVs have yet to be extracted. With the bundled ROOT file, the final command runs the three analyses directly \cite{repo}.
+
+{\small
+\begin{verbatim}
+tar -xzf datasets/datasets.tgz -C datasets
+make smhi_cleaner
+./smhi_cleaner
+CLEAN_DATA_PATH=results/data_cleaning/dataset_clean \
+  bash scripts/csv_to_ttree/process_files.sh
+make && ./main
+\end{verbatim}
+}
+
+The cleaner requires C++17. The analysis build uses the course ROOT installation via \texttt{root-config}. The shared executable opens the tree once and calls the three analysis modules. The figures in this report are the archived project outputs identified in their captions and accompanying discussion.
