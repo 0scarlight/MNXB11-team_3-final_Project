@@ -1,10 +1,8 @@
 #!/bin/bash
 set -euo pipefail
 
-# Resolve paths from this script so Git and the caller's working directory
-# are not needed to locate the project.
-cd -- "$(dirname -- "${BASH_SOURCE[0]}")/../.."
-SCRIPT_DIR="scripts/csv_to_ttree"
+SCRIPT_DIR="$(dirname "${BASH_SOURCE[0]}")"
+cd -- "$SCRIPT_DIR/../.."
 source "$SCRIPT_DIR/config.txt"
 
 for file in "${FILES[@]}"; do

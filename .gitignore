@@ -100,3 +100,6 @@ LaTeX/Sections/*.pdf
 
 # Ignore the resulting file(s) from root compilation
 *.pcm
+
+# Ignore the plots folder
+plots/*
