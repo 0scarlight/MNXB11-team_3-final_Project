@@ -1,0 +1,13 @@
+\documentclass[../main.tex]{subfiles}
+\graphicspath{{\subfix{../images/}}}
+\begin{document}
+
+\section{File Processing}
+
+To facilitate the data analysis it was decided to store the and format the data into a tree which would allow for a more direct interface with the ROOT framework. This means that the program has to find the correct line of the input file and be able to split each line into individual substrings in each line to then make an object and fill the tree. 
+
+This implementation achieves this by iterating through the document using a while loop and checking each line for a quality flag. This works since only the lines containing data have this flag and also comes with the additional benefit of being able to select which quality flags the program accepts and stores in the tree.
+
+The tree store the data in the \textit{ClimateData} class which is a custom class derived from \textit{TObject}. The class consists of member function that store each individual unit of time that occurs in the raw data file, the measurement, and the station name. The class has getter for every member variable and has four other getter to get formatted timestamps and dates. These special getters each time unit being a member variable and the station name are meant to allow for greater sorting and comparing of the data set for the data analysis. 
+
+\end{document}
