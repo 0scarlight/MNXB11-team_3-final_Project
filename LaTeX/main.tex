@@ -14,12 +14,15 @@
     filecolor=blue,     % Color of file links
     urlcolor=black          % Color of external links
 }
+\usepackage[backend=biber, style=phys, sorting=none]{biblatex}
+\addbibresource{references.bib}
 \usepackage{booktabs}
 \usepackage{tabularx}
 \usepackage{tikz}
 \usetikzlibrary{positioning,arrows.meta}
 \usepackage{placeins}
 \usepackage{setspace}
+\usepackage{subfiles}
 \title{MNXB11 Final Project Report}
 \author{\textbf{Team 3:}\\
 Rebecca Batchelor, \\ 
@@ -29,15 +32,10 @@ Oscar Tang
 }
 \date{\today}
 
-\setstretch{1.12}
+\onehalfspacing
 \newcommand{\degC}{\,{}^\circ\mathrm{C}}
-\newcommand{\projectplot}[1]{%
-  \IfFileExists{../plots/#1}{%
-    \includegraphics[width=.91\linewidth,height=.40\textheight,keepaspectratio]{../plots/#1}%
-  }{%
-    \includegraphics[width=.91\linewidth,height=.40\textheight,keepaspectratio]{plots/#1}%
-  }%
-}
+
+
 \makeatletter
 \def\input@path{{LaTeX/}}
 \makeatother
@@ -66,5 +64,7 @@ Oscar Tang
 \FloatBarrier
 \input{Sections/conclusion.tex}
 \input{Sections/references.tex}
+
+\printbibliography
 
 \end{document}
