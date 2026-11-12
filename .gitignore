@@ -79,5 +79,27 @@ LaTeX/*.snm
 LaTeX/*.vrb
 LaTeX/*.xdv
 
+LaTeX/Sections/*.aux
+LaTeX/Sections/*.bbl
+LaTeX/Sections/*.bcf
+LaTeX/Sections/*.blg
+LaTeX/Sections/*.fdb_latexmk
+LaTeX/Sections/*.fls
+LaTeX/Sections/*.log
+LaTeX/Sections/*.out
+LaTeX/Sections/*.run.xml
+LaTeX/Sections/*.synctex.gz
+LaTeX/Sections/*.toc
+LaTeX/Sections/*.lof
+LaTeX/Sections/*.lot
+LaTeX/Sections/*.nav
+LaTeX/Sections/*.snm
+LaTeX/Sections/*.vrb
+LaTeX/Sections/*.xdv
+LaTeX/Sections/*.pdf
+
 # Ignore the resulting file(s) from root compilation
 *.pcm
+
+# Ignore the plots folder
+plots/*
