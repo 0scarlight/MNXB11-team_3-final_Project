@@ -91,7 +91,7 @@ std::cout << "Mean = " << mean << " Standard Deviation = " << stdev <<
  "\n";
 
 
-new TCanvas();
+auto canvas = new TCanvas();
 histogram->Draw();
 
 //guassian curve from mean and standard deviation
@@ -145,4 +145,3 @@ std::cout << "P(T > 20) = " << p_above << "\n";
     
 
      
-
