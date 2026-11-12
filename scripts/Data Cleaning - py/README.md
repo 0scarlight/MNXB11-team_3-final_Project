@@ -3,9 +3,11 @@
 
 This is my part of our course project, focusing on **data cleaning** of historical temperature observations from SMHI.
 
-## Proposed Project Workflow
+## Coarse Cleaning in the Workflow
 
-![Project Workflow](<Data Cleaning and Analysis Workflow.png>)
+![Raw SMHI observations pass through Coarse Cleaning, highlighted in red, to produce cleaned CSV files](coarse_cleaning_workflow.svg)
+
+See the [proposed project workflow](../../README.md#proposed-project-workflow) for the full pipeline.
 
 ## Data Cleaning Procedure
 

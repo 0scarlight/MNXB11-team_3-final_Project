@@ -1,29 +1,34 @@
 # Introduction:
-This repository contains and documents the a solution to the final project of the course MNXB11 given at LU made and implemented by Team 3. The given task was to extract, format, and analyze a data set to extract and represent the data using the ROOT framework.
+This repository contains and documents a solution to the final project of the course MNXB11 given at LU made and implemented by Team 3. The given task was to extract, format, and analyze a data set to extract and represent the data using the ROOT framework.
 
 # Project structure: 
 The project has been split into two major parts, with each part subsequently being split into subtasks.  
 
+**To run the three analyses with the bundled ROOT file**, go directly to [Data Analysis](#data-analysis). Follow the Data Handling steps below only if you want to rebuild that input from the raw SMHI files.
+
 ## Data Handling 
 The data handling is the part where the raw data gets vetted and converted into a more manageable format for the data analysis and consists of:
 
+See the [Work Plan](Workplan.md) for the workflow and responsibilities and the [LaTeX report source](LaTeX/main.tex) for the scientific write-up.
+
 ### Data cleaning
-Checks through the raw data and removes any files suspicious entries. 
 
-To run the data cleaning:
+The C++ batch cleaner runs four quality checks on the SMHI station data. From the repository root in the MNXB11 container, run the following. Skip the extraction line if the raw station CSVs are already in `datasets/`.
 
-* Ensure that all the prerequisite python libraries are installed
-* Set the the path to the raw dataset in the [smhi_cleaner_four_steps.py](scripts/data_cleaning/smhi_cleaner_four_steps.py) script
-  * Optionally change the limits set in the script
-* Run:
 ```bash
-python scripts/data_cleaning/smhi_cleaner_four_steps.py
+tar -xzf datasets/datasets.tgz -C datasets
+make smhi_cleaner
+./smhi_cleaner
 ```
+
+The cleaner reads station CSVs from `datasets/` and writes cleaned data to `results/data_cleaning/dataset_clean/` and deletion logs to `results/data_cleaning/removed_records/`. See the [C++ guide](scripts/Data%20Cleaning%20-%20C%2B%2B/README.md) for details.
+
+For a more visual, interactive look at the cleaning process, you can also use the [Python cleaner](scripts/Data%20Cleaning%20-%20py/).
 
 ### File processing 
 The file processing part converts the outputted cleaned csv-files from the data cleaning part and converts it into a TTree stored in a `.root` file using the class `ClimateData`. 
 
-To run the file Processing:
+For a custom set of cleaned CSVs, configure the converter as follows:
 
 * Locate the cleaned data files that are to be processed
   * Ensure that all the files are in the same directory
@@ -34,15 +39,28 @@ To run the file Processing:
 scripts/csv_to_ttree/process_files.sh
 ```
 
+**For the bundled stations cleaned with C++ above**, the station list is already configured. Run this command from the repository root on the MNXB11 course host or inside the course container:
+
+```bash
+CLEAN_DATA_PATH=results/data_cleaning/dataset_clean bash scripts/csv_to_ttree/process_files.sh
+```
+
+The conversion regenerates `Climate_data_file.root` in the repository root. Then continue with [Data Analysis](#data-analysis).
 
 ## Data Analysis
-The data analysis is where the data actually gets used and represented. This project covers 3 different ways to analyze the data, those being:
 
-* The mean temperature for each day of a given year
-* The mean temperature of a given day for a given number of years
-* THe amount of days in a year that have a mean temperature below 0°C in a year
+The project covers three ways to analyse the data.
 
-To run the data analysis:
+Start in the repository root inside the MNXB11 container. The build uses C++17 and the container's ROOT installation (`root-config --version` shows the installed version). The repository includes `Climate_data_file.root`, the input for all three analyses.
+
 ```bash
-
+make && ./main
 ```
+
+From the MNXB11 course host, run `bash scripts/buildproject.sh && bash scripts/runproject.sh` to build and run inside the container.
+
+| Analysis | Output in the repository root | Reference results |
+| --- | --- | --- |
+| Mean temperature for each calendar day across years | `daily_mean_over_years.pdf` | [Task 3.2 figures](plots/daily_mean_temperature/) |
+| Temperature distribution for one selected calendar day across years | `day_analysis.pdf` | [Task 3.1 figures](plots/selected_day_temperature/) |
+| Annual Cold Days (days with mean temperature below 0 °C) | `annual_cold_days.pdf`, `annual_cold_days.png` | [Topic 3 method](scripts/data_analysis_topic_3.md) and [reference results](plots/annual_cold_days/) |

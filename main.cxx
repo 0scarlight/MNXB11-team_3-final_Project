@@ -1,30 +1,29 @@
 #include "daily_means.h"
 #include "day_analysis.h"
-/// #include "insert own task header file here"
-#include <iostream>
+#include "annual_cold_days.h"
+
 #include <TFile.h>
 #include <TTree.h>
 
-int main(){
-  
-  /// open our file
-  TFile* file = TFile::Open("Climate_data_file.root");
+#include <iostream>
 
-  /// print if file does not exist 
-  if (!file || file->IsZombie()) {
-        std::cout << "Error: Could not open file!" << std::endl;
+int main()
+{
+    TFile file("Climate_data_file.root");
+    if (file.IsZombie()) {
+        std::cerr << "Error: Could not open Climate_data_file.root.\n";
         return 1;
-  }
+    }
 
-  /// get the tree
-  TTree* tree = nullptr;
-  file->GetObject("tree", tree);
+    TTree* tree = nullptr;
+    file.GetObject("tree", tree);
+    if (!tree) {
+        std::cerr << "Error: Could not read the temperature tree.\n";
+        return 1;
+    }
 
-  PlotDailyMean(tree);
-  DayHistogram(tree, "Falsterbo", 6, 30);
-  ///call function for our made up task here
-
-  file->Close();
-  delete file;
-  return 0;
+    PlotDailyMean(tree);
+    PlotAnnualColdDays(tree);
+    DayHistogram(tree, "Falsterbo", 6, 30);
+    return 0;
 }

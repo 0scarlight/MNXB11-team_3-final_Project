@@ -1,25 +1,42 @@
 #!/bin/bash
+set -euo pipefail
 
-GITROOT=$(git rev-parse --show-toplevel)
+# Resolve paths from this script so Git and the caller's working directory
+# are not needed to locate the project.
+cd -- "$(dirname -- "${BASH_SOURCE[0]}")/../.."
+SCRIPT_DIR="scripts/csv_to_ttree"
+source "$SCRIPT_DIR/config.txt"
 
-if [ -d $GITROOT ]; then
-     cd $GITROOT
-   else
-     echo "not a git repository, exiting..."
-     exit 1
+for file in "${FILES[@]}"; do
+    if [[ ! -f "$file" || ! -r "$file" ]]; then
+        printf 'Cannot read cleaned station CSV: %s\n' "$file" >&2
+        exit 1
+    fi
+done
+
+if command -v root >/dev/null 2>&1; then
+    ROOT_COMMAND=(root)
+elif command -v startmnxb11container.sh >/dev/null 2>&1; then
+    ROOT_COMMAND=(startmnxb11container.sh root)
+elif [[ -x /projects/hep/fs11/share/mnxb11/bin/startmnxb11container.sh ]]; then
+    ROOT_COMMAND=(/projects/hep/fs11/share/mnxb11/bin/startmnxb11container.sh root)
+else
+    printf 'ROOT is unavailable. Run this script in the MNXB11 environment.\n' >&2
+    exit 1
 fi
 
-SCRIPT_DIR="$(dirname "${BASH_SOURCE[0]}")"
+# Keep the generated input list out of the tracked files.
+file_list=$(mktemp "$SCRIPT_DIR/.files.XXXXXX")
+trap 'rm -f -- "$file_list"' EXIT
+printf '%s\n' "${FILES[@]}" > "$file_list"
 
-source "$SCRIPT_DIR/config.txt"
-printf '%s\n' "${FILES[@]}" > "$SCRIPT_DIR/files.txt"
-
-/projects/hep/fs11/share/mnxb11/bin/startmnxb11container.sh root <<ROOT_INPUT
-.L src/climate_class.cxx+
-.L src/file_processing.cxx+
-.L scripts/csv_to_ttree/createTTree.C
-createTTree("$SCRIPT_DIR/files.txt");
+"${ROOT_COMMAND[@]}" -l -b <<ROOT_INPUT
+if (!gSystem->CompileMacro("src/climate_class.cxx", "k")) gSystem->Exit(1);
+if (!gSystem->CompileMacro("src/file_processing.cxx", "k")) gSystem->Exit(1);
+{
+    Int_t error = 0;
+    gROOT->ProcessLine(".x scripts/csv_to_ttree/createTTree.C(\\"$file_list\\")", &error);
+    if (error != 0) gSystem->Exit(1);
+}
 .q
 ROOT_INPUT
-
-exit
