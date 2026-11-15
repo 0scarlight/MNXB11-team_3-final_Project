@@ -5,17 +5,8 @@ SCRIPT_DIR="$(dirname "${BASH_SOURCE[0]}")"
 cd -- "$SCRIPT_DIR/../.."
 source "$SCRIPT_DIR/config.txt"
 
-for file in "${FILES[@]}"; do
-    if [[ ! -f "$file" || ! -r "$file" ]]; then
-        printf 'Cannot read cleaned station CSV: %s\n' "$file" >&2
-        exit 1
-    fi
-done
-
 if command -v root >/dev/null 2>&1; then
     ROOT_COMMAND=(root)
-elif command -v startmnxb11container.sh >/dev/null 2>&1; then
-    ROOT_COMMAND=(startmnxb11container.sh root)
 elif [[ -x /projects/hep/fs11/share/mnxb11/bin/startmnxb11container.sh ]]; then
     ROOT_COMMAND=(/projects/hep/fs11/share/mnxb11/bin/startmnxb11container.sh root)
 else
